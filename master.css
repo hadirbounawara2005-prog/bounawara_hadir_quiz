@@ -1,0 +1,137 @@
+*{
+  margin:0;
+  top:0px;
+  box-sizing: border-box;
+}
+
+/*j'ait fait une petite recherche sur google pour trouver une methode pour faciliter l'utilsation des plusieurs
+couleurs et jai trouvé  technique des couleurs variables */
+:root {
+  --couleur1: #2B6CB0;
+  --couleur2: #2DD4BF;
+  --couleur3: #F7FAFC;
+  --couleur4: #FFFFFF;
+  --couleur5: #0F172A;
+
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: var(--couleur3);
+  color: var(--couleur5);
+  margin: 0;
+  padding: 0;
+}
+
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--couleur1);
+  color: white;
+  padding: 15px 40px;
+  box-shadow: 0 2px 10px ;
+}
+
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 25px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+nav a:hover,
+nav a.active {
+  color: var(--couleur2);
+}
+
+.hero {
+  text-align: center;
+  padding: 80px 20px;
+  background: linear-gradient(to right, var(--couleur1), var(--couleur2));
+  color: white;
+}
+
+.hero h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  max-width: 600px;
+  margin: 0 auto 30px;
+  font-size: 17px;
+}
+
+.btn-start {
+  background: white;
+  color: var(--couleur1);
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.btn-start:hover {
+  background: var(--couleur2);
+  color: white;
+}
+
+.features {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+  padding: 60px 20px;
+}
+
+.card {
+  background: var(--couleur4);
+  width: 280px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px ;
+  padding: 25px;
+  transition: 0.5s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px ;
+}
+
+.card h3 {
+  color: var(--couleur1);
+}
+
+footer {
+  background: var(--couleur1);
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+  margin-top: 60px;
+}
+h1{
+  font-variant: small-caps;
+  color: white;
+  text-shadow: black 1px 1px 1px;
+}
+/* pour que le site devient responsive et adaptable pour les telephones et les computers */
+@media  (max-width: 600px) {
+  *{
+    width: 90%;
+    font-size: 14px;
+  }
+  header {
+   flex-direction: column;
+   text-align: center;
+ }
+
+ nav a {
+   display: block;
+   margin: 10px 0;
+ }
+}
