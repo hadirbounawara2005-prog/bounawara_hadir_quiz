@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <title>Web Quiz Master</title>
   <meta name="description" content="Teste tes connaissances en HTML, CSS et JavaScript avec Web Quiz Master. Apprends, joue et progresse !">
   <link rel="stylesheet" href="master.css">
 </head>
+
 <body>
   <header>
-      <h1> ⚙️? Quiz HTML/CSS/JS</h1>
+    <h1> ⚙️? Quiz HTML/CSS/JS</h1>
     <nav>
-      <a href="home.html" class="active">Home</a>
-      <a href="quiz.html">Quiz</a>
-      <a href="statistiques.html">Statistiques</a>
+      <a href="" class="active">Home</a>
     </nav>
   </header>
 
@@ -20,12 +20,29 @@
     <div class="hero-content">
       <h2>Teste tes compétences en développement web</h2>
       <p>Découvre un quiz interactif sur HTML, CSS et JavaScript pour t’amuser tout en progressant.
-      Chaque essai te rapproche de la maîtrise du web !</p>
-      <a href="quiz.html" class="btn-start">Commencer le Quiz</a>
+        Chaque essai te rapproche de la maîtrise du web !</p>
+      <!-- lors de clique les question va apparitres f nafs l page  -->
+      <!-- tous les liens ici joue le meme role dun boutton puisque tout
+    une seul page html  -->
+      <a href="" id="lien1" class="btn-start">Commencer le Quiz</a>
     </div>
   </section>
 
-  <section class="features">
+  <div id="quiz-container" style="display:none;">
+    <form id="quiz-form">
+      <div id="timer" style="font-weight:bold; margin-bottom:10px;">Temps restant: 20:00</div>
+      <!-- Questions cree avec JS -->
+    </form>
+    <button id="submit-quiz">Voir Score</button>
+  </div>
+
+  <div id="results" style="display:none;"></div>
+  <div id="stats" style="display:none;"></div>
+
+  <section class="features"><!--
+      lors de click de boutton pour commencer le quiz les features va disparaitre eft le quiz
+      se declanche avec le chnometre
+    . -->
     <div class="card">
       <h3>📘 HTML</h3>
       <p>Apprends à structurer le web avec des balises claires et sémantiques.</p>
@@ -46,4 +63,5 @@
   </footer>
   <script src="controles.js" charset="utf-8"></script>
 </body>
+
 </html>
