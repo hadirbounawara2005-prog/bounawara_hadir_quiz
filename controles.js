@@ -1,7 +1,8 @@
+// Données du quiz
 const questions = [
   {
     question: "1. Quelle balise HTML est utilisée pour créer un lien hypertexte ?",
-    options: ["<a>", "<link>", "<href>", "<url>"],
+    options: ["&lt;a&gt;", "&lt;link&gt;", "&lt;href&gt;", "&lt;url&gt;"],
     correct: 0
   },
   {
@@ -26,7 +27,7 @@ const questions = [
   },
   {
     question: "5. Quelle balise contient le titre du site ?",
-    options: ["<header>", "<title>", "<head>", "<meta>"],
+    options: ["&lt;header&gt;", "&lt;title&gt;", "&lt;p&gt;", "&lt;meta&gt;"],
     correct: 1
   },
   {
@@ -35,8 +36,8 @@ const questions = [
     correct: 1
   },
   {
-    question: "7. En JavaScript, quel symbole est utilisé pour les commentaires ?",
-    options: ["#", "//", "/* */", "<!-- -->"],
+    question: "7. En JavaScript, quel est la fonction pour transformer une chaine S en majuscules ?",
+    options: ["S.toLowerCase()", "S.toUpperCase()", "S.length", "S.slice(a,b)"],
     correct: 1
   },
   {
@@ -76,7 +77,7 @@ const questions = [
   },
   {
     question: "14. Quelle balise HTML crée une liste ordonnée ?",
-    options: ["<ul>", "<ol>", "<li>", "<list>"],
+    options: ["&lt;ul&gt;", "&lt;ol&gt;", "&lt;li&gt;", "&lt;list&gt;"],
     correct: 1
   },
   {
@@ -95,7 +96,7 @@ const questions = [
     correct: 1
   },
   {
-    question: "18. En HTML, que fait la balise <strong> ?",
+    question: "18. En HTML, que fait la balise &lt;strong&gt;?",
     options: ["Met le texte en italique", "Souligne le texte", "Met le texte en gras", "Rien du tout"],
     correct: 2
   },
@@ -110,8 +111,113 @@ const questions = [
     correct: 0
   }
 ];
-const lien = document.getElementById("lien1");
-  lien.addEventListener("click", function(e) {
-    e.preventDefault(); // empeche le lien de deplaceemnt  a une autre page
 
+// Sélection des éléments du DOM
+const lien = document.getElementById("lien1");
+const quizContainer = document.getElementById("quiz-container");
+const quizForm = document.getElementById("quiz-form");
+const submitBtn = document.getElementById("submit-quiz");
+const resultsDiv = document.getElementById("results");
+const statsDiv = document.getElementById("stats");
+
+let time = 20 * 60; // 20 minutes
+let timerInterval;
+let attempt = localStorage.getItem('quiz_attempt') ? parseInt(localStorage.getItem('quiz_attempt')) + 1 : 1;
+
+// Démarrer le quiz
+lien.addEventListener("click", function(e){
+  e.preventDefault();
+  lien.style.display = "none";
+  document.getElementById("features").style.display= "none";
+  quizContainer.style.display = "block";
+  generateQuiz();
+  startTimer();
+});
+
+// Générer les questions
+function generateQuiz() {//creation dun div pour le chronometre
+  quizForm.innerHTML = `<div id="timer" style="box-shadow: 3px 3px
+  3px gray; font-weight:bold; margin-bottom:10px;">Temps restant: 20:00</div>`;
+  questions.forEach((q,i) => {
+    const div = document.createElement("div");
+    div.style.border ="solid 1px gray"
+    div.style.borderRadius ="5px"
+    div.style.padding ="15px"
+    div.style.width ="600px"
+    div.style.margin ="4px 0px 4px 500px"
+    div.style.boxShadow ="3px 3px 3px gray"
+    div.innerHTML = `<p style='color:#008080' >${q.question}</p>` +
+      q.options.map((opt, idx) => `<label><input type="radio" name="q${i}" value="${idx}"> ${opt}</label><br>`).join('');
+    quizForm.append(div);
   });
+}
+
+// temps de quizz:chnometre
+function startTimer(){
+  updateTimer();
+  timerInterval = setInterval(() => {
+    time--;
+    if(time <= 0){
+      clearInterval(timerInterval);
+      calculateScore();
+    }
+    updateTimer();
+  },1000);
+}
+
+function updateTimer(){
+  let minutes = Math.floor(time/60);
+  let seconds = time % 60;
+  document.getElementById("timer").innerText = `Temps restant: ${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+}
+
+// Calcul du score
+submitBtn.addEventListener("click", function(e){
+  e.preventDefault();
+  clearInterval(timerInterval);
+  calculateScore();
+});
+
+function calculateScore(){
+  let score = 0;
+  questions.forEach((q,i) => {
+    const selected = quizForm.querySelector(`input[name=q${i}]:checked`);
+    if(selected && parseInt(selected.value) === q.correct) score++;
+  });
+
+  // Sauvegarder dans localStorage
+  const quizData = JSON.parse(localStorage.getItem('quiz_data')) || [];
+  quizData.push({attempt: attempt, score: score, date: new Date().toLocaleString()});
+  localStorage.setItem('quiz_data', JSON.stringify(quizData));
+  localStorage.setItem('quiz_attempt', attempt);
+  showresults(score);
+  showstats();
+}
+
+// Afficher le résultat et corrections
+function showresults(score){
+  quizContainer.style.display = "none";
+  resultsDiv.style.display = "block";
+  resultsDiv.innerHTML = `<h2>Votre score: ${score}/${questions.length}</h2>`;
+
+  // Corrections
+  let correctionHTML = "<h3>Corrections:</h3>";
+  questions.forEach((q,i) => {
+    const selected = quizForm.querySelector(`input[name=q${i}]:checked`);
+    correctionHTML += `<p>${q.question} <br>
+      Votre réponse: ${selected ? q.options[selected.value] : "Aucune"} <br>
+    Bonne réponse: ${q.options[q.correct]}</p>`;
+  });
+  resultsDiv.innerHTML += correctionHTML;
+}
+
+// Afficher les statistiques
+function showstats(){
+  const quizData = JSON.parse(localStorage.getItem('quiz_data'));
+  statsDiv.style.display = "block";
+  let statsHTML = "<h3>Statistiques:</h3>";
+  quizData.forEach(d => {
+    statsHTML += `<p>Essai ${d.attempt}: Score = ${d.score}/${questions.length}, Date = ${d.date}</p>`;
+  });
+  statsDiv.innerHTML = statsHTML;
+}
