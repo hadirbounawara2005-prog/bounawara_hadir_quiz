@@ -52,7 +52,7 @@ L’interface est **animée, responsive et conviviale**, adaptée à tous les é
 - Structuration du code en **fonctions modulaires** pour plus de clarté  
 - Tests progressifs sur différents écrans pour améliorer le **responsive design**  
 - Consultation de la **documentation MDN** et de tutoriels sur la manipulation du DOM
-- 
+
 ---
 
 ## 👤 Auteur
