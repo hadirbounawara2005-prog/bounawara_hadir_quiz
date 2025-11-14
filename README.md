@@ -27,8 +27,7 @@ L’interface est **animée, responsive et conviviale**, adaptée à tous les é
 ---
 
 ## 🔗 Lien vers la version hébergée
-➡️ [Voir le projet en ligne sur GitHub Pages](https://ton-nom-utilisateur.github.io/nom_du_projet/)  
-*(Remplace ce lien par ton vrai lien après le déploiement)*
+➡️ https://hadirbounawara2005-prog.github.io/bounawara_hadir_quiz/
 
 ---
 
@@ -62,6 +61,4 @@ L’interface est **animée, responsive et conviviale**, adaptée à tous les é
 **Projet :** Quiz interactif sur le cours HTML, CSS et JS  
 **Année universitaire :** 2025  
 **Encadrante :** Mme Rania Maalej
-**Projet :** Quiz interactif sur le cours HTML, CSS et JS  
-**Année universitaire :** 2025  
-**Encadrante :** Mme Rania Maalej
+
