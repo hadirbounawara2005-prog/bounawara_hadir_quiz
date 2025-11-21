@@ -129,7 +129,7 @@ lien.addEventListener("click", function(e){
   e.preventDefault();
   lien.style.display = "none";
   document.getElementById("features").style.display= "none";
-  quizContainer.style.display = "block";
+  quizContainer.style.display = "block";// avant le demarrage de quiz le container etait : display:none
   generateQuiz();
   startTimer();
 });
@@ -138,7 +138,8 @@ lien.addEventListener("click", function(e){
 function generateQuiz() {//creation dun div pour le chronometre
   quizForm.innerHTML = `<div id="timer" style="box-shadow: 3px 3px
   3px gray; font-weight:bold; margin-bottom:10px;">Temps restant: 20:00</div>`;
-  questions.forEach((q,i) => {
+  questions.forEach((q,i) => {//on va parcourir tous les questions de quiz et inserer
+    //chaque question dans un DIV
     const div = document.createElement("div");
     div.style.border ="solid 1px gray"
     div.style.borderRadius ="5px"
@@ -148,6 +149,7 @@ function generateQuiz() {//creation dun div pour le chronometre
     div.style.boxShadow ="3px 3px 3px gray"
     div.innerHTML = `<p style='color:#008080' >${q.question}</p>` +
       q.options.map((opt, idx) => `<label><input type="radio" name="q${i}" value="${idx}"> ${opt}</label><br>`).join('');
+      //c'est pour recuperer les champs de q (question courant pointé avec foreach)
     quizForm.append(div);
   });
 }
@@ -192,32 +194,49 @@ function calculateScore(){
   localStorage.setItem('quiz_attempt', attempt);
   showresults(score);
   showstats();
+
+
 }
 
 // Afficher le résultat et corrections
 function showresults(score){
   quizContainer.style.display = "none";
   resultsDiv.style.display = "block";
-  resultsDiv.innerHTML = `<h2>Votre score: ${score}/${questions.length}</h2>`;
+  resultsDiv.innerHTML = `<h2 id='h22'>Votre score: ${score}/${questions.length}</h2>`;
 
   // Corrections
-  let correctionHTML = "<h3>Corrections:</h3>";
+  let correctionHTML = "<h3 id='h3'>Corrections:</h3>";
   questions.forEach((q,i) => {
     const selected = quizForm.querySelector(`input[name=q${i}]:checked`);
-    correctionHTML += `<p>${q.question} <br>
-      Votre réponse: ${selected ? q.options[selected.value] : "Aucune"} <br>
+    correctionHTML += `<br><br><p>${q.question} <br><br>
+      Votre réponse: ${selected ? q.options[selected.value] : "Aucune"} <br><br>
     Bonne réponse: ${q.options[q.correct]}</p>`;
   });
   resultsDiv.innerHTML += correctionHTML;
+
+  let div = resultsDiv;
+  div.style.border ="solid 1px gray"
+  div.style.borderRadius ="5px"
+  div.style.padding ="15px"
+  div.style.width ="550px"
+  div.style.margin ="4px 0px 4px 500px"
+  div.style.boxShadow ="3px 3px 3px gray"
 }
 
 // Afficher les statistiques
 function showstats(){
   const quizData = JSON.parse(localStorage.getItem('quiz_data'));
   statsDiv.style.display = "block";
-  let statsHTML = "<h3>Statistiques:</h3>";
+  let statsHTML = "<h3 id='h3'>Statistiques:</h3>";
   quizData.forEach(d => {
-    statsHTML += `<p>Essai ${d.attempt}: Score = ${d.score}/${questions.length}, Date = ${d.date}</p>`;
+    statsHTML += `<br><p id='pp'> Essai ${d.attempt}:  Score = ${d.score}/${questions.length}, Date = ${d.date}</p>`;
   });
   statsDiv.innerHTML = statsHTML;
+  statsDiv.style.padding = "20px";
+  statsDiv.style.margin = "10px";
+  statsDiv.style.fontSize = "18px";
+  let btn = document.getElementById("retour_home");
+  btn.style.display = "block";
+
+
 }
