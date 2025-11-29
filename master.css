@@ -4,14 +4,35 @@
   box-sizing: border-box;
 }
 
-#timer {
+#timer {background-color: #F8F8FF;
+  animation: an infinite 3s;
   padding:10px;
+  border-radius: 10px;
   margin-top:4px;
   text-align:center;
   font-variant:small-caps;
   color:#6495ED;
   font-weight:bold;
   margin-bottom:10px;
+}
+@keyframes an {
+  0%{
+    opacity: 0
+  }
+  25%{
+    opacity: 0.25
+  }
+  50%{
+    opacity: 0.5
+
+  }
+  75%{
+    opacity: 0.75
+  }
+  100%{
+    opacity: 1
+  }
+
 }
 /*j'ait fait une petite recherche sur google pour trouver une methode pour faciliter l'utilsation des plusieurs
 couleurs et jai trouvé  technique des couleurs variables */
@@ -144,17 +165,53 @@ h1{
    margin: 10px 0;
  }
 }
-#submit-quiz,#retour_home{margin-top: 15px;
-  margin-left: 960px;
+#h3{
+      color: #4682B4;
+      font-size: 25px;
+      margin-top: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-shadow: 3px 3px 3px white ;
+      font-variant: small-caps;
+
+  }
+/*mise en forme des' essais' statistiques*/
+
+#h22{
+  color: #008080;
+  font-variant: small-caps;
+}
+
+#divcorrec{background-color:#F0FFF0;
+  transition: all 1s;
+}
+#divcorrec:hover{
+  background-color: #B0E0E6;
+  transform: translateY(-5px);
+}
+#divcorrec,#divquestion, #results, #quiz-container , #stats {
+    width: 90%;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px auto;
+    box-shadow: 3px 3px 3px gray;
+    border: solid 1px gray ;
+}
+#submit-quiz,#retour_home{
     background-color:#E0FFFF;
-    padding: 15px 30px;
+    padding: 15px ;
     border: none;
+    width: 40%;
+    text-align: center;
+    border-radius: 10px;
+    margin-left: 30%;
     color: #008B8B;
     border-radius: 12px;
     font-size: 15px;
-    font-weight: bold;
     box-shadow: 0 6px 10px rgba(0,0,0,0.2);
     transition: all 0.3s ease;
+    margin-top: 5px;
+    font-weight: 600;
   }
 
 #retour_home:hover {
@@ -168,28 +225,10 @@ h1{
     transform: translateY(-3px);
     box-shadow: 0 10px 15px rgba(0,0,0,0.3);
   }
-#h3{
-      color: #4682B4;
-      font-size: 25px;
-      text-align: center;
-      margin-top: 10px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      text-shadow: 3px 3px 3px white ;
-      font-variant: small-caps;
-
+@media (max-width:600px){
+   #quiz-container,#divcorrec, #divquestion, #results, #stats, #submit-quiz, #retour_home {
+    width: 90%;
+    margin: 10px auto;
+    font-size: 14px;
   }
-/*mise en forme des' essais' statistiques*/
-#pp{padding: 12px;
-  width: 480px;
-  margin-left: 500px;
-  margin-top: 6px;
-  border: solid 3px gray;
-  box-shadow: 3px 3px 3px gray;
-  border-radius: 5px;
-
-}
-#h22{
-  color: #008080;
-  font-variant: small-caps;
 }
